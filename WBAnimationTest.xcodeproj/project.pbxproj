@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B0469BC1C639D9100BA8817 /* FoldAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0469BB1C639D9100BA8817 /* FoldAnimation.swift */; };
 		5BBE8FAA1C5F8E1F00B3B032 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BBE8FA91C5F8E1F00B3B032 /* AppDelegate.swift */; };
 		5BBE8FAF1C5F8E1F00B3B032 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BBE8FAD1C5F8E1F00B3B032 /* Main.storyboard */; };
 		5BBE8FB11C5F8E2000B3B032 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BBE8FB01C5F8E2000B3B032 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B0469BB1C639D9100BA8817 /* FoldAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldAnimation.swift; sourceTree = "<group>"; };
 		5BBE8FA61C5F8E1F00B3B032 /* WBAnimationTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WBAnimationTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BBE8FA91C5F8E1F00B3B032 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BBE8FAE1C5F8E1F00B3B032 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		5BBE8FA81C5F8E1F00B3B032 /* WBAnimationTest */ = {
 			isa = PBXGroup;
 			children = (
+				5B0469BB1C639D9100BA8817 /* FoldAnimation.swift */,
 				5BBE8FC71C5FC08D00B3B032 /* CAGradientLayerTest.swift */,
 				5BBE8FBF1C5F93AE00B3B032 /* CAReplicatorLayerTest.swift */,
 				5BBE8FBB1C5F8EAA00B3B032 /* HomeViewController.swift */,
@@ -140,6 +143,7 @@
 			files = (
 				5BBE8FC01C5F93AE00B3B032 /* CAReplicatorLayerTest.swift in Sources */,
 				5BBE8FAA1C5F8E1F00B3B032 /* AppDelegate.swift in Sources */,
+				5B0469BC1C639D9100BA8817 /* FoldAnimation.swift in Sources */,
 				5BBE8FBC1C5F8EAA00B3B032 /* HomeViewController.swift in Sources */,
 				5BBE8FC81C5FC08D00B3B032 /* CAGradientLayerTest.swift in Sources */,
 			);
@@ -288,6 +292,7 @@
 				5BBE8FBA1C5F8E2000B3B032 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

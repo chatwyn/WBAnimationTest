@@ -10,7 +10,7 @@ import UIKit
 
 class HomeViewController: UITableViewController {
     
-    let array = [String(CAReplicatorLayerTest),String(CAGradientLayer)]
+    let array = [String(CAReplicatorLayerTest),String(CAGradientLayer),String(FoldAnimation)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +30,17 @@ class HomeViewController: UITableViewController {
         
         cell.textLabel?.text = array[indexPath.row]
 
-        
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
         var vc:UIViewController?
 
         switch (indexPath.row){
         case 0 :vc = CAReplicatorLayerTest.init()
+        case 1 :vc = CAGradientLayerTest.init()
+        case 2 :vc = FoldAnimation.init()
         default: return
         }
         navigationController?.pushViewController(vc!, animated: true)

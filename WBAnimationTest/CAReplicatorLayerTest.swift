@@ -16,19 +16,81 @@ class CAReplicatorLayerTest: UIViewController {
     // 被复制的的layer
     let replicatorView = CALayer.init()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.whiteColor()
         
+        
+        
+        // 下方的文字动画效果
+        addTextAnimation()
+        // 倒影
+        addReflection()
+        // 平移动画
+        addTransformAnimation()
+        
+        
+        
+        
+        
+    }
+    
+    /**
+     平移动画
+     */
+    func addTransformAnimation() {
+        let replicatorLayer = CAReplicatorLayer.init()
+        replicatorLayer.instanceCount = 3
+        
+        replicatorLayer.frame  = CGRect(x: 20, y: 230, width: 80, height: 100)
+        self.view.layer.addSublayer(replicatorLayer)
+        
+        let image = UIImageView.init(image: UIImage.init(named: "8266801_1310119667018_1024x1024"))
+        image.frame = replicatorLayer.bounds
+        replicatorLayer.addSublayer(image.layer)
+        
+        
+        replicatorLayer.instanceTransform = CATransform3DMakeTranslation(100, 0, 0)
+        
+        let animation = CABasicAnimation.init(keyPath: "instanceTransform.translation.x")
+        animation.toValue = 130
+        animation.repeatCount = MAXFLOAT
+        animation.duration = 2
+        animation.autoreverses = true
+        replicatorLayer.addAnimation(animation, forKey: "")
+    }
+    /**
+     添加镜像
+     */
+    func addReflection() {
+        
+        let replicatorLayer = CAReplicatorLayer.init()
+        replicatorLayer.instanceCount = 2
+        replicatorLayer.instanceAlphaOffset = -0.5
+        replicatorLayer.frame  = CGRect(x: 20, y: 80, width: 100, height: 120)
+        self.view.layer.addSublayer(replicatorLayer)
+        
+        let image = UIImageView.init(image: UIImage.init(named: "8266801_1310119667018_1024x1024"))
+        image.frame = replicatorLayer.bounds
+        replicatorLayer.addSublayer(image.layer)
+        
+        var transform = CATransform3DIdentity
+        transform = CATransform3DTranslate(transform, image.frame.size.width + 40, 0, 0)
+        transform = CATransform3DScale(transform, -1, 1, 0)
+        replicatorLayer.instanceTransform = transform
+        
+    }
+    
+    func addTextAnimation() {
+        // 添加文字
         addTextPath()
         // 添加被复制的view
         addReplicatorView()
         // 添加副本layer
         addReplicatorLayer()
-
     }
-    
     /**
      添加文字 chatwyn
      */
@@ -38,6 +100,7 @@ class CAReplicatorLayerTest: UIViewController {
         textPath.frame = CGPathGetBoundingBox(path.CGPath)
         
         textPath.position = view.center
+        textPath.position.y += 50
         textPath.geometryFlipped = true
         textPath.path = path.CGPath
         
@@ -54,8 +117,8 @@ class CAReplicatorLayerTest: UIViewController {
     func addReplicatorView() {
         
         replicatorView.frame = CGRectMake(34, 5,2, 2)
-        replicatorLayer.cornerRadius = 1
-        replicatorView.backgroundColor = UIColor.cyanColor().CGColor
+        replicatorView.cornerRadius = 1
+        replicatorView.backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: 1).CGColor
         
     }
     /**
@@ -64,42 +127,39 @@ class CAReplicatorLayerTest: UIViewController {
     func addReplicatorLayer() {
         
         replicatorLayer.frame = textPath.bounds
-
+        
         textPath.addSublayer(replicatorLayer)
-
+        
         replicatorLayer.addSublayer(replicatorView)
-
+        
         startAnimation()
         
-
+        
         
     }
     
     func startAnimation() {
         // 副本数量(包括本身的一个)
         let replicatorCount = 500
-        let duration:CFTimeInterval = 7
-    
+        let duration:CFTimeInterval = 5
+        
         replicatorLayer.instanceDelay = duration / CFTimeInterval(replicatorCount)
         replicatorLayer.instanceCount = replicatorCount
-
-        replicatorLayer.instanceRedOffset = -0.003
+        
+        replicatorLayer.instanceRedOffset = -0.005
         replicatorLayer.instanceGreenOffset = -0.003
         replicatorLayer.instanceBlueOffset = -0.001
         
         let positionAnmation = CAKeyframeAnimation.init(keyPath: "position")
+        
         positionAnmation.path = textPath.path
         positionAnmation.duration = duration
         positionAnmation.repeatCount = MAXFLOAT
-        // 如果在replicatorLayer上添加的话 只会做动画 并不会有延迟 
+        // 如果在replicatorLayer上添加的话 只会做动画 并不会有延迟
         // 需要添加到被复制的layer上才会有delay
         replicatorView.addAnimation(positionAnmation, forKey: "")
         
-        
-        
     }
-    
-
     
     /**
      将字符串转变成贝塞尔曲线

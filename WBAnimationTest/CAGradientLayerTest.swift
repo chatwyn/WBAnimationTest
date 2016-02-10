@@ -9,27 +9,48 @@
 import UIKit
 
 class CAGradientLayerTest: UIViewController {
-
+    
+    let layer = CAGradientLayer.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        self.view.backgroundColor = UIColor.whiteColor()
+        
+        // 颜色数组
+        layer.colors = [UIColor.redColor().CGColor,UIColor.greenColor().CGColor,UIColor.yellowColor().CGColor]
+        // 颜色的方向
+        layer.startPoint = CGPointZero
+        layer.endPoint = CGPoint(x: 1, y: 1)
+        
+        // 0 - 0.3 红色 0.3 - 0.5 红绿渐变色。0.5-0.8绿黄渐变 0.8 -1 黄色
+        layer.locations = [0.3,0.5,0.8]
+        
+        layer.frame = self.view.bounds
+        
+        self.view.layer.addSublayer(layer)
+        
+        
+        // 动画之后的颜色数组
+        let toColors = [UIColor.whiteColor().CGColor,UIColor.cyanColor().CGColor,UIColor.purpleColor().CGColor]
+        
+        let animation = CABasicAnimation.init(keyPath: "colors")
+        
+        animation.duration = 1.0
+        animation.toValue = toColors
+        animation.repeatCount = MAXFLOAT
+        
+        //  动画结束后，再动画回来
+        animation.autoreverses = true
+        
+        layer.addAnimation(animation, forKey: "color")
+        
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        layer.removeAllAnimations()
     }
-    */
-
+    
 }
