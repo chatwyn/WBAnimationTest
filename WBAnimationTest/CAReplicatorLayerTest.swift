@@ -21,68 +21,18 @@ class CAReplicatorLayerTest: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.whiteColor()
-        
-        
-        
+ 
         // 下方的文字动画效果
         addTextAnimation()
         // 倒影
         addReflection()
         // 平移动画
         addTransformAnimation()
-        
-        
-        
-        
+
         
     }
     
-    /**
-     平移动画
-     */
-    func addTransformAnimation() {
-        let replicatorLayer = CAReplicatorLayer.init()
-        replicatorLayer.instanceCount = 3
-        
-        replicatorLayer.frame  = CGRect(x: 20, y: 230, width: 80, height: 100)
-        self.view.layer.addSublayer(replicatorLayer)
-        
-        let image = UIImageView.init(image: UIImage.init(named: "8266801_1310119667018_1024x1024"))
-        image.frame = replicatorLayer.bounds
-        replicatorLayer.addSublayer(image.layer)
-        
-        
-        replicatorLayer.instanceTransform = CATransform3DMakeTranslation(100, 0, 0)
-        
-        let animation = CABasicAnimation.init(keyPath: "instanceTransform.translation.x")
-        animation.toValue = 130
-        animation.repeatCount = MAXFLOAT
-        animation.duration = 2
-        animation.autoreverses = true
-        replicatorLayer.addAnimation(animation, forKey: "")
-    }
-    /**
-     添加镜像
-     */
-    func addReflection() {
-        
-        let replicatorLayer = CAReplicatorLayer.init()
-        replicatorLayer.instanceCount = 2
-        replicatorLayer.instanceAlphaOffset = -0.5
-        replicatorLayer.frame  = CGRect(x: 20, y: 80, width: 100, height: 120)
-        self.view.layer.addSublayer(replicatorLayer)
-        
-        let image = UIImageView.init(image: UIImage.init(named: "8266801_1310119667018_1024x1024"))
-        image.frame = replicatorLayer.bounds
-        replicatorLayer.addSublayer(image.layer)
-        
-        var transform = CATransform3DIdentity
-        transform = CATransform3DTranslate(transform, image.frame.size.width + 40, 0, 0)
-        transform = CATransform3DScale(transform, -1, 1, 0)
-        replicatorLayer.instanceTransform = transform
-        
-    }
-    
+
     func addTextAnimation() {
         // 添加文字
         addTextPath()
@@ -224,6 +174,55 @@ class CAReplicatorLayerTest: UIViewController {
         
         return bezierPath
     }
+    
+    
+    
+    /**
+     平移动画
+     */
+    func addTransformAnimation() {
+        let replicatorLayer = CAReplicatorLayer.init()
+        replicatorLayer.instanceCount = 3
+        
+        replicatorLayer.frame  = CGRect(x: 20, y: 230, width: 80, height: 100)
+        self.view.layer.addSublayer(replicatorLayer)
+        
+        let image = UIImageView.init(image: UIImage.init(named: "8266801_1310119667018_1024x1024"))
+        image.frame = replicatorLayer.bounds
+        replicatorLayer.addSublayer(image.layer)
+        
+        
+        replicatorLayer.instanceTransform = CATransform3DMakeTranslation(100, 0, 0)
+        
+        let animation = CABasicAnimation.init(keyPath: "instanceTransform.translation.x")
+        animation.toValue = 130
+        animation.repeatCount = MAXFLOAT
+        animation.duration = 2
+        animation.autoreverses = true
+        replicatorLayer.addAnimation(animation, forKey: "")
+    }
+    /**
+     添加镜像
+     */
+    func addReflection() {
+        
+        let replicatorLayer = CAReplicatorLayer.init()
+        replicatorLayer.instanceCount = 2
+        replicatorLayer.instanceAlphaOffset = -0.5
+        replicatorLayer.frame  = CGRect(x: 20, y: 80, width: 100, height: 120)
+        self.view.layer.addSublayer(replicatorLayer)
+        
+        let image = UIImageView.init(image: UIImage.init(named: "8266801_1310119667018_1024x1024"))
+        image.frame = replicatorLayer.bounds
+        replicatorLayer.addSublayer(image.layer)
+        
+        var transform = CATransform3DIdentity
+        transform = CATransform3DTranslate(transform, image.frame.size.width + 40, 0, 0)
+        transform = CATransform3DScale(transform, -1, 1, 0)
+        replicatorLayer.instanceTransform = transform
+        
+    }
+    
     
     
     
