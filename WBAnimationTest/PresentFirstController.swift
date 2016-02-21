@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PresentFirstController: UIViewController{
+class PresentFirstController: UIViewController,UIGestureRecognizerDelegate{
     
     lazy var gesture:UIScreenEdgePanGestureRecognizer =  UIScreenEdgePanGestureRecognizer.init(target: self, action: Selector("RecognizerAction:"))
     
@@ -40,6 +40,7 @@ class PresentFirstController: UIViewController{
         gesture.edges = .Right
         
         self.navigationController?.delegate = self
+        
     }
     
     func RecognizerAction(gesture:UIScreenEdgePanGestureRecognizer){
@@ -64,7 +65,6 @@ class PresentFirstController: UIViewController{
         let vc = PresentSecondController()
         
         vc.transitioningDelegate = self
-        //        vc.modalPresentationStyle = .Custom
         
         self.presentViewController(vc, animated: true, completion: nil)
     }
@@ -72,7 +72,9 @@ class PresentFirstController: UIViewController{
     func push(){
         let vc = PresentSecondController()
         
+        
         self.navigationController?.pushViewController(vc, animated: true)
+        vc.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     
@@ -113,6 +115,7 @@ extension PresentFirstController: UINavigationControllerDelegate{
     
     func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?{
         
+       
         if operation == .Push{
             let animator = TransitionAnimator()
             
@@ -120,7 +123,14 @@ extension PresentFirstController: UINavigationControllerDelegate{
             
             return animator
         }else{
-            return nil
+            if fromVC == self{
+                return nil
+            }
+            let animator = TransitionAnimator()
+            
+            animator.transition = .Dismiss
+            
+            return animator
         }
         
     }
