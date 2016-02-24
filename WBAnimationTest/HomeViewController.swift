@@ -9,12 +9,13 @@
 import UIKit
 
 class HomeViewController: UITableViewController {
-    
-    let array = [String(CAReplicatorLayerTest),String(CAGradientLayer),String(FoldAnimation),String(CAShapeLayerTest),String(PresentFirstController)]
+
+    let array = [NSStringFromClass(CAReplicatorLayerTest),NSStringFromClass(CAGradientLayerTest),NSStringFromClass(FoldAnimation),NSStringFromClass(CAShapeLayerTest),NSStringFromClass(PresentFirstController)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+
     }
     
     // MARK: - Table view data source
@@ -28,7 +29,7 @@ class HomeViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
-        cell.textLabel?.text = array[indexPath.row]
+        cell.textLabel?.text = array[indexPath.row].componentsSeparatedByString(".").last
 
         return cell
     }
@@ -36,15 +37,9 @@ class HomeViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
         var vc:UIViewController?
-
-        switch (indexPath.row){
-        case 0 :vc = CAReplicatorLayerTest()
-        case 1 :vc = CAGradientLayerTest()
-        case 2 :vc = FoldAnimation()
-        case 3 :vc = CAShapeLayerTest()
-        case 4 :vc = PresentFirstController()
-        default: return
-        }
+        
+        let type = NSClassFromString(array[indexPath.row]) as! UIViewController.Type
+        vc =  type.init()
         navigationController?.pushViewController(vc!, animated: true)
     }
     

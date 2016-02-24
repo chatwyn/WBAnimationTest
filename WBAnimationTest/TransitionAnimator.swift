@@ -54,9 +54,7 @@ class TransitionAnimator: NSObject,UIViewControllerAnimatedTransitioning {
             
             dismissAnimation(transitionContext, fromView: fromView!, toView: toView!, containerView: containerView!, fromController: fromViewController!, toController: toViewController!)
         }
-        
-//        toViewController?.beginAppearanceTransition(true, animated: true)
-        
+                
     }
     
     // present的动画

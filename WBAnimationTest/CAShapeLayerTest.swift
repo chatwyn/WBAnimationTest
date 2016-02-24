@@ -142,6 +142,7 @@ class CAShapeLayerTest: UIViewController {
         backBtn.setTitle("返回", forState: .Normal)
         backBtn.addTarget(self, action: "back", forControlEvents: .TouchUpInside)
         view.addSubview(backBtn)
+        
     }
     
     func back() {

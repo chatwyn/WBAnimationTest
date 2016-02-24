@@ -40,6 +40,7 @@ class PresentFirstController: UIViewController,UIGestureRecognizerDelegate{
         gesture.edges = .Right
         
         self.navigationController?.delegate = self
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         
     }
     
@@ -71,10 +72,9 @@ class PresentFirstController: UIViewController,UIGestureRecognizerDelegate{
     
     func push(){
         let vc = PresentSecondController()
-        
-        
+
         self.navigationController?.pushViewController(vc, animated: true)
-        vc.navigationController?.interactivePopGestureRecognizer?.delegate = self
+
     }
     
     
@@ -104,7 +104,7 @@ extension PresentFirstController:  UIViewControllerTransitioningDelegate{
     }
     
     func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning?{
-        // isPanGestureRecognizer是用来判断我是用手势还是用的按钮执行的present的动画
+        // isPanGestureRecognizer是用来判断我·是用手势还是用的按钮执行的present的动画
         return self.isPanGestureRecognizer ? InteractionController.init(gesture: self.gesture) : nil
         
     }
@@ -134,6 +134,11 @@ extension PresentFirstController: UINavigationControllerDelegate{
         }
         
     }
+    
+    
+    
+    
+
 }
 
 
